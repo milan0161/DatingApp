@@ -8,9 +8,7 @@
     padding: 0;
     box-sizing: border-box;
   }
-  body {
-    @apply bg-slate-950 text-white;
-  }
+
   h1 {
     @apply text-2xl font-bold;
   }
@@ -19,5 +17,22 @@
   }
   a {
     @apply text-blue-600 cursor-pointer;
+  }
+  .navigation_bar {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr;
+    /* align-items: center; */
+    color: white;
+    background-color: black;
+    height: 70px;
+  }
+  .nav_form {
+    @apply flex gap-x-2 my-auto;
+  }
+  .nav_form input {
+    @apply p-2 rounded text-black outline-none;
+  }
+  .nav_form button {
+    @apply p-2  rounded border border-green-700 text-green-700;
   }
 }
