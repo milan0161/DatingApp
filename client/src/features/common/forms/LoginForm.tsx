@@ -2,12 +2,13 @@ import { useLoginMutation } from "../../account/api/accountApi";
 import React, { useRef, useEffect } from "react";
 import { useAppDispatch } from "../../../app/hooks/hooks";
 import { onLogin } from "../../account/state/accountSlice";
+import { showApiError, showSucces } from "../../../app/utils/ToastMsg";
 const LoginForm = () => {
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const [login, { isSuccess, data }] = useLoginMutation();
+  const [login, { isSuccess, data, error, isError }] = useLoginMutation();
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -19,9 +20,12 @@ const LoginForm = () => {
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(onLogin(data));
+      showSucces("You have successfully logged in");
+    } else if (isError) {
+      showApiError(error);
     }
     return;
-  }, [isSuccess, data, dispatch]);
+  }, [isSuccess, data, dispatch, isError, error]);
 
   return (
     <form onSubmit={loginHandler} className="nav_form">

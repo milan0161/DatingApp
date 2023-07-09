@@ -15,13 +15,40 @@ const NavBar = () => {
       <ul className="flex text-slate-400 gap-x-9 ml-5 text-lg my-5">
         {accountState.isLoggedIn && (
           <li>
-            <NavLink className="text-slate-400" to={"members"}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav_links active" : "nav_links"
+              }
+              to={"members"}
+            >
               Matches
             </NavLink>
           </li>
         )}
-        {accountState.isLoggedIn && <li>List</li>}
-        {accountState.isLoggedIn && <li>Messages</li>}
+        {accountState.isLoggedIn && (
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav_links active" : "nav_links"
+              }
+              to={"lists"}
+            >
+              Lists
+            </NavLink>
+          </li>
+        )}
+        {accountState.isLoggedIn && (
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav_links active" : "nav_links"
+              }
+              to={"messages"}
+            >
+              Messages
+            </NavLink>
+          </li>
+        )}
       </ul>
       {!accountState.isLoggedIn && <LoginForm />}
       {accountState.isLoggedIn && (

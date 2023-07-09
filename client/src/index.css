@@ -23,9 +23,13 @@
     grid-template-columns: 0.5fr 2fr 1fr;
     /* align-items: center; */
     color: white;
-    background-color: black;
+    /* background-color: #541337; */
     height: 70px;
   }
+  .navigation_bar {
+    @apply bg-orange-600;
+  }
+
   .nav_form {
     @apply flex gap-x-2 my-auto;
   }
@@ -33,6 +37,12 @@
     @apply p-2 rounded text-black outline-none;
   }
   .nav_form button {
-    @apply p-2  rounded border border-green-700 text-green-700;
+    @apply py-2 px-4  rounded  bg-green-700 text-white hover:bg-white hover:text-green-700 hover:outline hover:outline-green-700 duration-150;
+  }
+  .nav_links {
+    @apply text-white opacity-50 hover:opacity-100 duration-100;
+  }
+  .active {
+    @apply opacity-100;
   }
 }
