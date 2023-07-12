@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks/hooks";
 import { onLogout } from "../../account/state/accountSlice";
+import { useNavigate } from "react-router-dom";
 
 type DropDownProps = {
   username: string;
@@ -8,10 +9,12 @@ type DropDownProps = {
 
 const Drowdown = ({ username }: DropDownProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // let [prvo, ...ostatak] = username;
   const logoutHandler = () => {
     dispatch(onLogout());
+    navigate("/");
   };
   return (
     <>

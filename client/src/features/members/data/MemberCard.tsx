@@ -4,6 +4,7 @@ import {
   faUser,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 type MemberCardProps = {
   member: Member;
@@ -19,10 +20,14 @@ const MemberCard = ({ member }: MemberCardProps) => {
           alt={member.knownAs}
         />
         <ul className="icon_wrapper">
-          <li className="">
-            <button className="icon_btn">
-              <FontAwesomeIcon icon={faUser} color="#fff" />
-            </button>
+          <li className="w-10 h-10 flex">
+            <Link
+              to={`${member.userName}`}
+              className="w-full flex items-center justify-center bg-orange-600
+               hover:bg-orange-700 duration-200 rounded"
+            >
+              <FontAwesomeIcon icon={faUser} className="" color="#fff" />
+            </Link>
           </li>
           <li className="">
             <button className="icon_btn">

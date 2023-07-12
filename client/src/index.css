@@ -26,6 +26,9 @@
     /* background-color: #541337; */
     height: 70px;
   }
+  .btn {
+    @apply w-20 h-8 rounded;
+  }
   .navigation_bar {
     @apply bg-orange-600;
   }
