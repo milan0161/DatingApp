@@ -34,6 +34,21 @@ namespace API.Controllers
 
 
         }
+           [HttpGet]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+
+            if(user == null) return NotFound();
+            _mapper.Map(memberUpdateDto, user);
+
+            if( await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update user");
+            
+        }
     }
 }
 //Ako je asinhrono request se prosledi drugom tredu (delegatu) a u medjuvremenu tred koji je primio request moze da obradjuje druge requeste ili sta drugo treba da radi. Nije blokiran. Kad se zavrsi query main tred pokupi podatka i vraca response kroz response.
