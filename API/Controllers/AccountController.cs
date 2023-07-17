@@ -46,7 +46,7 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user)
             };
         }
-        [HttpPost("login")] //POST: /api/account/register
+        [HttpPost("login")] //POST: /api/account/login
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             //find je dobar ako znas id

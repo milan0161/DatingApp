@@ -1,8 +1,9 @@
-import { useLoginMutation } from "../../account/api/accountApi";
-import React, { useRef, useEffect } from "react";
-import { useAppDispatch } from "../../../app/hooks/hooks";
-import { onLogin } from "../../account/state/accountSlice";
-import { showApiError, showSucces } from "../../../app/utils/ToastMsg";
+import { useLoginMutation } from '../../account/api/accountApi';
+import React, { useRef, useEffect } from 'react';
+import { useAppDispatch } from '../../../app/hooks/hooks';
+import { onLogin } from '../../account/state/accountSlice';
+import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
+
 const LoginForm = () => {
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -17,10 +18,11 @@ const LoginForm = () => {
       username: emailRef.current!.value,
     });
   };
+
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(onLogin(data));
-      showSucces("You have successfully logged in");
+      showSucces('You have successfully logged in');
     } else if (isError) {
       showApiError(error);
     }

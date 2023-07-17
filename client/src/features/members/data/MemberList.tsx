@@ -1,8 +1,12 @@
-import { useGetMembersQuery } from "../api/membersApi";
-import MemberCard from "./MemberCard";
-const MemberList = () => {
-  const { data, isSuccess } = useGetMembersQuery();
+import LoadingSpinner from '../../common/UI/LoadingSpinner';
+import { useGetMembersQuery } from '../api/membersApi';
+import MemberCard from './MemberCard';
 
+const MemberList = () => {
+  const { data, isSuccess, isLoading } = useGetMembersQuery();
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div>
       <div className=" mx-auto mt-4 gap-6 members_list">

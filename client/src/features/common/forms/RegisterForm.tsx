@@ -1,8 +1,8 @@
-import { useAppDispatch } from "../../../app/hooks/hooks";
-import { useRegisterMutation } from "../../account/api/accountApi";
-import React, { useRef } from "react";
-import { onLogin } from "../../account/state/accountSlice";
-import { showApiError, showSucces } from "../../../app/utils/ToastMsg";
+import { useAppDispatch } from '../../../app/hooks/hooks';
+import { useRegisterMutation } from '../../account/api/accountApi';
+import React, { useRef } from 'react';
+import { onLogin } from '../../account/state/accountSlice';
+import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
 
 type RegisterFormProps = {
   setRegister: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,9 +23,9 @@ const RegisterForm = ({ setRegister }: RegisterFormProps) => {
       .unwrap()
       .then((data) => {
         dispatch(onLogin(data));
-        showSucces("You have successfully registered");
-        usernameRef.current!.value = "";
-        passwordRef.current!.value = "";
+        showSucces('You have successfully registered');
+        usernameRef.current!.value = '';
+        passwordRef.current!.value = '';
       })
       .catch((err) => showApiError(err));
   };

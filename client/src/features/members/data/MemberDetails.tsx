@@ -3,6 +3,7 @@ import { useGetMemberQuery } from '../api/membersApi';
 import MemberTabPanel from './MemberTabPanel';
 import MemberTabset from './MemberTabset';
 import MemberImageList from './MemberPhotoList';
+import LoadingSpinner from '../../common/UI/LoadingSpinner';
 
 type MemberDetailsProps = {
   username: string;
@@ -13,14 +14,18 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
   const { data: member, isLoading } = useGetMemberQuery(username);
 
   if (isLoading) {
-    return <h2 className="text-center mt-10">Loading....</h2>;
+    return <LoadingSpinner />;
   }
 
   return (
     <div className="grid grid-cols-12">
       <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4">
         <div className="w-full h-[50%] border border-slate-300 px-1 py-1 rounded">
-          <img className="w-full h-full" src={member?.photoUrl} alt={member?.knownAs} />
+          <img
+            className="w-full h-full"
+            src={member?.photoUrl}
+            alt={member?.knownAs}
+          />
         </div>
         <div className="flex flex-col gap-y-5">
           <div>
@@ -44,8 +49,12 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
         </div>
         <div className="mb-4">
           <div className="flex flex-row items-center justify-center gap-x-5">
-            <button className="btn bg-orange-600 text-white font-bold">Like</button>
-            <button className="btn bg-green-600 text-white font-bold">Messages</button>
+            <button className="btn bg-orange-600 text-white font-bold">
+              Like
+            </button>
+            <button className="btn bg-green-600 text-white font-bold">
+              Messages
+            </button>
           </div>
         </div>
       </div>

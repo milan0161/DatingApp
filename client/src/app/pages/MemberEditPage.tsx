@@ -4,6 +4,7 @@ import MemberTabset from '../../features/members/data/MemberTabset';
 import { useAppSelector } from '../hooks/hooks';
 import MemberTabPanel from '../../features/members/data/MemberTabPanel';
 import UpdateMemberForm from '../../features/members/data/MemberUpdateForm';
+import LoadingSpinner from '../../features/common/UI/LoadingSpinner';
 
 // interface FormInput {
 //   introduction: string;
@@ -20,7 +21,7 @@ const MemberEditPage = () => {
   const { data: member, isLoading } = useGetMemberQuery(user.username);
 
   if (isLoading) {
-    return <h2 className="text-center">Loading....</h2>;
+    return <LoadingSpinner />;
   }
   // const {
   //   formState: { isDirty },
@@ -42,14 +43,15 @@ const MemberEditPage = () => {
   return (
     <div className="grid grid-cols-12 w-[80%] mx-auto">
       {/* <div className="flex flex-row justify-evenly items-center col-span-12 border border-red-600 h-40"> */}
-      <div className="col-span-4 h-28">
-        <h1 className="text-[30px] mt-6">Your Profile</h1>
+      <div className="col-span-4 my-6">
+        <h1 className="text-[30px] ">Your Profile</h1>
       </div>
-      <div className="col-span-8   overflow-hidden  h-28">
+      <div className="col-span-8 overflow-hidden">
         {isDirty && (
           <div className="bg-blue-300 h-20 mt-6 rounded-xl px-4 py-2">
             <p>
-              <strong>Information: </strong>You have made changes. Any unsaved changes will be lost
+              <strong>Information: </strong>You have made changes. Any unsaved
+              changes will be lost
             </p>
           </div>
         )}
@@ -57,7 +59,11 @@ const MemberEditPage = () => {
       {/* </div> */}
       <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4 max-h-[676px]">
         <div className="w-full h-[50%] border border-slate-300 px-1 py-1 rounded">
-          <img className="w-full h-full" src={member?.photoUrl} alt={member?.knownAs} />
+          <img
+            className="w-full h-full"
+            src={member?.photoUrl}
+            alt={member?.knownAs}
+          />
         </div>
         <div className="flex flex-col gap-y-5">
           <div>
@@ -90,7 +96,12 @@ const MemberEditPage = () => {
         </div>
       </div>
       <div className="col-span-8 block">
-        <MemberTabset username={member!.userName} value={value} setValue={setValue} labels={['About', 'Interests']}>
+        <MemberTabset
+          username={member!.userName}
+          value={value}
+          setValue={setValue}
+          labels={['About', 'Interests']}
+        >
           <MemberTabPanel value={value} index={0}>
             <UpdateMemberForm
               city={member!.city}

@@ -3,11 +3,11 @@
     "**/bin": true,
     "**/obj": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
-  "prettier.printWidth": 120,
+  "prettier.printWidth": 80,
   "prettier.semi": true
 }
