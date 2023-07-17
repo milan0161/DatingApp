@@ -5,7 +5,7 @@ const MemberList = () => {
 
   return (
     <div>
-      <div className=" w-3/4 mx-auto mt-4 gap-6 members_list">
+      <div className=" mx-auto mt-4 gap-6 members_list">
         {isSuccess &&
           data &&
           data.map((member) => {
