@@ -20,3 +20,11 @@ interface Photo {
   url: string;
   isMain: boolean;
 }
+
+interface FormInput {
+  introduction: string;
+  lookingFor: string;
+  interests: string;
+  city: string;
+  country: string;
+}
