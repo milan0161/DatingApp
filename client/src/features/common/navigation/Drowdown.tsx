@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks/hooks";
 import { onLogout } from "../../account/state/accountSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type DropDownProps = {
   username: string;
@@ -25,7 +25,12 @@ const Drowdown = ({ username }: DropDownProps) => {
         </button>
         {isVisible && (
           <div className="flex flex-col gap-y-1 bg-slate-500 mt-[25px] border border-slate-800 rounded w-28 items-center py-2">
-            <p className="hover:translate-x-2 duration-150">Edit Profile</p>
+            <Link
+              to={"member/edit"}
+              className="hover:translate-x-2 duration-150 text-white"
+            >
+              Edit Profile
+            </Link>
             <button
               onClick={logoutHandler}
               className="hover:translate-x-2 duration-150"

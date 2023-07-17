@@ -7,6 +7,7 @@ import MessagesPage from "../pages/MessagesPage";
 import RootLayout from "../pages/RootLayout";
 import RequireAuth from "./RequireAuth";
 import MemberDetailPage from "../pages/MemberDetailPage";
+import MemberEditPage from "../pages/MemberEditPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
                 element: <MemberDetailPage />,
               },
             ],
+          },
+          {
+            path: "member/edit",
+            element: <MemberEditPage />,
           },
           {
             path: "messages",

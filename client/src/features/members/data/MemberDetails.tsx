@@ -1,11 +1,15 @@
+import React from "react";
 import { useGetMemberQuery } from "../api/membersApi";
+import MemberTabPanel from "./MemberTabPanel";
 import MemberTabset from "./MemberTabset";
+import MemberImageList from "./MemberPhotoList";
 
 type MemberDetailsProps = {
   username: string;
 };
 
 const MemberDetails = ({ username }: MemberDetailsProps) => {
+  const [value, setValue] = React.useState(0);
   const { data: member, isLoading } = useGetMemberQuery(username);
 
   if (isLoading) {
@@ -56,10 +60,27 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
       <div className="col-span-8">
         <MemberTabset
           username={member!.userName}
-          interests={member!.interests}
-          introduction={member!.introduction}
-          lookingFor={member!.lookingFor}
-        />
+          setValue={setValue}
+          value={value}
+          labels={["About", "Interest", "Photos", "Messages"]}
+        >
+          <MemberTabPanel value={value} index={0}>
+            <h4 className="text-[30px] text-bold mb-4">Description</h4>
+            <p>{member!.introduction}</p>
+            <h4 className="text-[30px] text-bold my-4">Looking for</h4>
+            <p>{member!.lookingFor}</p>
+          </MemberTabPanel>
+          <MemberTabPanel value={value} index={1}>
+            <h4 className="text-[30px] text-bold mb-4">Interests</h4>
+            <p>{member!.interests}</p>
+          </MemberTabPanel>
+          <MemberTabPanel value={value} index={2}>
+            <MemberImageList images={member!.photos} />
+          </MemberTabPanel>
+          <MemberTabPanel value={value} index={3}>
+            <p>Messages will go here</p>
+          </MemberTabPanel>
+        </MemberTabset>
       </div>
     </div>
   );
