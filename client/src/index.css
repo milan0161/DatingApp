@@ -56,7 +56,9 @@
     grid-template-columns: repeat(6, 1fr);
     grid-auto-flow: row; */
   }
-
+  .delete_photo_btn {
+    @apply rounded border border-red-500 py-1 px-2 bg-red-500 hover:scale-105 duration-200;
+  }
   .img_wrapper:hover .icon_wrapper {
     bottom: 10%;
     opacity: 1;

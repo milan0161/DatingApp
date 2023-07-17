@@ -5,6 +5,7 @@ import { useAppSelector } from '../hooks/hooks';
 import MemberTabPanel from '../../features/members/data/MemberTabPanel';
 import UpdateMemberForm from '../../features/members/data/MemberUpdateForm';
 import LoadingSpinner from '../../features/common/UI/LoadingSpinner';
+import PhotoEditor from '../../features/members/data/PhotoEditor';
 
 // interface FormInput {
 //   introduction: string;
@@ -100,7 +101,7 @@ const MemberEditPage = () => {
           username={member!.userName}
           value={value}
           setValue={setValue}
-          labels={['About', 'Interests']}
+          labels={['About', 'Edit Photos']}
         >
           <MemberTabPanel value={value} index={0}>
             <UpdateMemberForm
@@ -157,8 +158,7 @@ const MemberEditPage = () => {
             </form> */}
           </MemberTabPanel>
           <MemberTabPanel value={value} index={1}>
-            <h4 className="text-[30px] text-bold mb-4">Edit Photos</h4>
-            <p>Photo edit will go here</p>
+            <PhotoEditor photos={member!.photos} />
           </MemberTabPanel>
         </MemberTabset>
       </div>
