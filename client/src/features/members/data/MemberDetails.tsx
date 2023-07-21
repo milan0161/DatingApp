@@ -19,12 +19,13 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
 
   return (
     <div className="grid grid-cols-12">
-      <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4">
+      <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4 max-h-[676px]">
         <div className="w-full h-[50%] border border-slate-300 px-1 py-1 rounded">
           <img
             className="w-full h-full"
             src={member?.photoUrl}
             alt={member?.knownAs}
+            loading="lazy"
           />
         </div>
         <div className="flex flex-col gap-y-5">

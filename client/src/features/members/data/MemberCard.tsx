@@ -2,9 +2,9 @@ import {
   faEnvelope,
   faHeart,
   faUser,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 type MemberCardProps = {
   member: Member;
@@ -18,6 +18,7 @@ const MemberCard = ({ member }: MemberCardProps) => {
           className="w-full h-full hover:scale-125 duration-700 ease-out"
           src={member.photoUrl}
           alt={member.knownAs}
+          loading="lazy"
         />
         <ul className="icon_wrapper">
           <li className="w-10 h-10 flex">

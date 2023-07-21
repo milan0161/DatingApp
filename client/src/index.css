@@ -57,7 +57,7 @@
     grid-auto-flow: row; */
   }
   .delete_photo_btn {
-    @apply rounded border border-red-500 py-1 px-2 bg-red-500 hover:scale-105 duration-200;
+    @apply rounded border border-red-500 py-1 px-2 bg-red-500 hover:scale-105 duration-200 disabled:bg-red-400 disabled:scale-100;
   }
   .img_wrapper:hover .icon_wrapper {
     bottom: 10%;
@@ -68,5 +68,20 @@
   }
   .icon_btn {
     @apply bg-orange-600 w-10 h-10 rounded hover:bg-orange-700 duration-200;
+  }
+  .drop_zone {
+    @apply: border border-slate-300 rounded-xl flex flex-col items-center justify-center w-64 h-64 gap-y-2 mb-2 hover:border-red-700 duration-150;
+  }
+  .drop_zone_active {
+    @apply: bg-red-600 border-dotted scale-110;
+  }
+  .validation_error {
+    @apply text-red-600 px-1;
+  }
+  .register_input {
+    @apply outline-orange-400 border-slate-300 border rounded px-2 py-1 w-[350px] placeholder:text-slate-500;
+  }
+  .validation_invalid {
+    @apply border-red-500 bg-red-200 border-2;
   }
 }

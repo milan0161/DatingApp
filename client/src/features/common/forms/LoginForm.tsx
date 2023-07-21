@@ -3,6 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import { useAppDispatch } from '../../../app/hooks/hooks';
 import { onLogin } from '../../account/state/accountSlice';
 import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
+import { saveMainImgUrl, saveToken } from '../../../app/utils/saveToken';
+import { decodedAToken } from '../../../app/utils/decodeTokens';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -21,8 +23,11 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      dispatch(onLogin(data));
+      const decodedToken = decodedAToken(data.token);
+      saveToken(data.token, decodedToken!.exp);
+      saveMainImgUrl(data.photoUrl, decodedToken!.exp);
       showSucces('You have successfully logged in');
+      dispatch(onLogin(data));
     } else if (isError) {
       showApiError(error);
     }

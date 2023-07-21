@@ -6,13 +6,20 @@ type MemberImageListProps = {
 };
 const MemberImageList = ({ images }: MemberImageListProps) => {
   return (
-    <ImageList variant="woven">
-      {images.map((img) => (
-        <ImageListItem key={img.id}>
-          <img src={img.url} loading="lazy" />
-        </ImageListItem>
-      ))}
-    </ImageList>
+    <div className="border border-slate-300 rounded w-fit p-4">
+      <ImageList
+        variant="woven"
+        sx={{ width: 500, height: 450 }}
+        cols={3}
+        rowHeight={164}
+      >
+        {images.map((img) => (
+          <ImageListItem key={img.id}>
+            <img src={img.url} loading="lazy" />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </div>
   );
 };
 

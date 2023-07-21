@@ -17,6 +17,28 @@ const memberApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Member'],
     }),
+    addPhoto: builder.mutation<Photo, any>({
+      query: (data) => ({
+        url: `api/users/add-photo`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Member'],
+    }),
+    setMainPhoto: builder.mutation<void, number>({
+      query: (photoId) => ({
+        url: `api/users/set-main-photo/${photoId}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Member'],
+    }),
+    deletePhoto: builder.mutation<void, number>({
+      query: (photoId) => ({
+        url: `api/users/delete-photo/${photoId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Member'],
+    }),
   }),
 });
 
@@ -24,4 +46,7 @@ export const {
   useGetMembersQuery,
   useGetMemberQuery,
   useUpdateMemberMutation,
+  useAddPhotoMutation,
+  useSetMainPhotoMutation,
+  useDeletePhotoMutation,
 } = memberApi;

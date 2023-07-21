@@ -3,11 +3,22 @@ type ReqLogin = {
   password: string;
 };
 
+type ReqRegister = {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  knownAs: string;
+  city: string;
+  country: string;
+  dateOfBirth: string;
+};
 type User = {
   username: string;
   token: string;
+  photoUrl: string;
 };
 interface IAccountInitalState {
   user: User;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | undefined;
 }

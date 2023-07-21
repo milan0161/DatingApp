@@ -1,11 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const accountSlice = createSlice({
-  name: "account",
+  name: 'account',
   initialState: {
     user: {
-      token: "",
-      username: "",
+      token: '',
+      username: '',
+      photoUrl: '',
     },
     isLoggedIn: false,
   } as IAccountInitalState,
@@ -15,12 +16,18 @@ const accountSlice = createSlice({
       state.isLoggedIn = true;
     },
     onLogout: (state) => {
-      state.user.username = "";
-      state.user.token = "";
+      state.user.username = '';
+      state.user.token = '';
       state.isLoggedIn = false;
     },
+    setMainPhoto: (state, action: PayloadAction<string>) => {
+      state.user.photoUrl = action.payload;
+    },
+    // setIsAuth: (state, action: PayloadAction<boolean>) => {
+    //   state.isLoggedIn = action.payload;
+    // },
   },
 });
 
 export default accountSlice.reducer;
-export const { onLogin, onLogout } = accountSlice.actions;
+export const { onLogin, onLogout, setMainPhoto } = accountSlice.actions;

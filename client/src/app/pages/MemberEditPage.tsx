@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGetMemberQuery } from '../../features/members/api/membersApi';
 import MemberTabset from '../../features/members/data/MemberTabset';
 import { useAppSelector } from '../hooks/hooks';
@@ -24,18 +24,6 @@ const MemberEditPage = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  // const {
-  //   formState: { isDirty },
-  //   register,
-  // } = useForm<FormInput>({
-  //   defaultValues: {
-  //     city: member!.city,
-  //     country: member!.country,
-  //     interests: member!.interests,
-  //     introduction: member!.introduction,
-  //     lookingFor: member!.lookingFor,
-  //   },
-  // });
 
   const isDirtyHandler = (isDirty: boolean) => {
     setIsDirty(isDirty);
@@ -63,6 +51,7 @@ const MemberEditPage = () => {
           <img
             className="w-full h-full"
             src={member?.photoUrl}
+            loading="lazy"
             alt={member?.knownAs}
           />
         </div>
@@ -113,49 +102,6 @@ const MemberEditPage = () => {
               onChange={isDirtyHandler}
               setIsDirty={setIsDirty}
             />
-            {/* <form id="editForm">
-              <h4 className="text-[30px] text-bold mb-4">Description</h4>
-              <textarea
-                className="w-full border border-slate-300 rounded p-2"
-                rows={6}
-                // name="introduction"
-                defaultValue={member!.introduction}
-                {...register('introduction')}
-              ></textarea>
-              <h4 className="text-[30px] text-bold mb-4">Looking for</h4>
-              <textarea
-                className="w-full border border-slate-300 rounded p-2"
-                rows={6}
-                {...register('lookingFor')}
-                defaultValue={member!.lookingFor}
-              ></textarea>
-              <h4 className="text-[30px] text-bold mb-4">Interests</h4>
-              <textarea
-                className="w-full border border-slate-300 rounded p-2"
-                rows={6}
-                {...register('interests')}
-                defaultValue={member!.interests}
-              ></textarea>
-              <h4 className="text-[30px] text-bold mb-4">Location Details</h4>
-              <div className="flex items-center gap-x-4">
-                <label htmlFor="city">City:</label>
-                <input
-                  className="border border-slate-300 rounded p-2"
-                  type="text"
-                  {...register('city')}
-                  defaultValue={member!.city}
-                  id="city"
-                />
-                <label htmlFor="country">Country:</label>
-                <input
-                  className=" border border-slate-300 rounded p-2"
-                  type="text"
-                  {...register('country')}
-                  defaultValue={member!.country}
-                  id="country"
-                />
-              </div>
-            </form> */}
           </MemberTabPanel>
           <MemberTabPanel value={value} index={1}>
             <PhotoEditor photos={member!.photos} />

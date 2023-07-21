@@ -1,15 +1,14 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-
-import { showError } from '../utils/ToastMsg';
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { getAToken } from '../utils/saveToken';
-import { onLogin, onLogout } from '../../features/account/state/accountSlice';
+import {
+  onLogin,
+  onLogout,
+  // setIsAuth,
+} from '../../features/account/state/accountSlice';
 import { decodedAToken } from '../utils/decodeTokens';
 
-const RequireAuth = () => {
-  const navigate = useNavigate();
-
+const useAuth = () => {
   const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn);
   const dispatch = useAppDispatch();
 
@@ -20,15 +19,14 @@ const RequireAuth = () => {
     const token = getAToken();
     if (!token) {
       dispatch(onLogout());
-      navigate('/');
-      showError('You are not authorized to access.');
+      // setPersist(false);
       return;
     }
     const decodedToken = decodedAToken(token);
     dispatch(onLogin({ token, username: decodedToken!.nameid }));
   }, [isLoggedIn]);
 
-  return <Outlet />;
+  return isLoggedIn;
 };
 
-export default RequireAuth;
+export default useAuth;
