@@ -40,8 +40,15 @@ interface Pagination<T> {
 interface PaginationRequest {
   page: number;
   itemsPerPage: number;
+}
+
+interface PaginationUserRequest extends PaginationRequest {
   minAge: number;
   maxAge: number;
   gender?: string;
   orderBy?: string;
+}
+
+interface PaginationLikesRequest extends PaginationRequest {
+  predicate: string;
 }

@@ -1,5 +1,7 @@
+import LikesList from '../../features/likes/data/LikesList';
+
 const ListsPage = () => {
-  return <div>ListsPage</div>;
+  return <LikesList />;
 };
 
 export default ListsPage;

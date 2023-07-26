@@ -1,6 +1,6 @@
 import { apiSlice } from '../../../app/api/apiSLice';
 
-const defaultValue: PaginationRequest = {
+const defaultValue: PaginationUserRequest = {
   page: 1,
   itemsPerPage: 3,
   minAge: 18,
@@ -10,39 +10,41 @@ const defaultValue: PaginationRequest = {
 
 const memberApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMembers: builder.query<Pagination<Member>, PaginationRequest | void>({
-      query: ({
-        itemsPerPage,
-        page,
-        maxAge,
-        minAge,
-        gender,
-        orderBy,
-      }: PaginationRequest = defaultValue) => ({
-        url: `api/users`,
-        params: {
-          pageNumber: page,
-          pageSize: itemsPerPage,
+    getMembers: builder.query<Pagination<Member>, PaginationUserRequest | void>(
+      {
+        query: ({
+          itemsPerPage,
+          page,
           maxAge,
           minAge,
           gender,
           orderBy,
-        },
-      }),
-      transformResponse: (response: Member[], meta, arg) => {
-        let res: Pagination<Member>;
-        let pagin = JSON.parse(meta?.response?.headers.get('pagination')!);
+        }: PaginationUserRequest = defaultValue) => ({
+          url: `api/users`,
+          params: {
+            pageNumber: page,
+            pageSize: itemsPerPage,
+            maxAge,
+            minAge,
+            gender,
+            orderBy,
+          },
+        }),
+        transformResponse: (response: Member[], meta, arg) => {
+          let res: Pagination<Member>;
+          let pagin = JSON.parse(meta?.response?.headers.get('pagination')!);
 
-        res = {
-          currentPage: pagin.currentPage,
-          itemsPerPage: pagin.itemsPerPage,
-          totalItems: pagin.totalItems,
-          totalPages: pagin.totalPages,
-          data: response,
-        };
-        return res;
+          res = {
+            currentPage: pagin.currentPage,
+            itemsPerPage: pagin.itemsPerPage,
+            totalItems: pagin.totalItems,
+            totalPages: pagin.totalPages,
+            data: response,
+          };
+          return res;
+        },
       },
-    }),
+    ),
     getMember: builder.query<Member, string>({
       query: (username) => ({ url: `api/users/${username}` }),
       providesTags: ['Member'],

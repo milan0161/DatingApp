@@ -5,10 +5,11 @@ import MemberCard from './MemberCard';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import FilterForm from './FilterForm';
+import PaginationComponent from '../../common/UI/PaginationComponent';
 
 const MemberList = () => {
   const [orderBy, setOrderBy] = useState<string>('lastActive');
-  const [pagAndFilter, setPagAndFilter] = useState<PaginationRequest>({
+  const [pagAndFilter, setPagAndFilter] = useState<PaginationUserRequest>({
     itemsPerPage: 5,
     maxAge: 99,
     minAge: 18,
@@ -53,13 +54,17 @@ const MemberList = () => {
         <div className="flex items-center">
           <button
             onClick={orderByLastActiveHandler}
-            className="px-2 py-1 bg-red-700 text-white rounded-bl rounded-tl"
+            className={`px-2 py-1 text-white rounded-bl rounded-tl ${
+              orderBy === 'lastActive' ? 'bg-red-700' : 'bg-red-500'
+            }`}
           >
             Last Active
           </button>
           <button
             onClick={orderByCreated}
-            className="px-2 py-1 bg-red-500 text-white rounded-tr rounded-br"
+            className={`px-2 py-1 text-white rounded-tr rounded-br ${
+              orderBy === 'created' ? 'bg-red-700' : 'bg-red-500'
+            }`}
           >
             Newest members
           </button>
@@ -73,33 +78,11 @@ const MemberList = () => {
           })}
       </div>
       <div className="flex flex-row justify-center mt-5">
-        <Stack spacing={2} color={'orange'}>
-          <Pagination
-            sx={{
-              '& button': {
-                backgroundColor: 'white',
-                color: '#ea580c',
-                fontWeight: 'bold',
-              },
-              // '& button:focus': {
-              //   backgroundColor: '#ea580c',
-              //   color: 'white',
-              //   fontWeight: 'bold',
-              // },
-              '& button.Mui-selected': {
-                backgroundColor: '#ea580c',
-                color: 'white',
-                fontWeight: 'bold',
-              },
-            }}
-            count={members?.totalPages}
-            variant="outlined"
-            shape="rounded"
-            // color="primary"
-            page={pagAndFilter.page}
-            onChange={handleChange}
-          />
-        </Stack>
+        <PaginationComponent
+          count={members?.totalPages}
+          onChange={handleChange}
+          page={pagAndFilter.page}
+        />
       </div>
     </div>
   );

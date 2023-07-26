@@ -5,12 +5,28 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { useAddLikeMutation } from '../../likes/api/likesApi';
+import { showSucces } from '../../../app/utils/ToastMsg';
+import LoadingSpinner from '../../common/UI/LoadingSpinner';
 
 type MemberCardProps = {
   member: Member;
 };
 
 const MemberCard = ({ member }: MemberCardProps) => {
+  const [addLike, { isSuccess, isLoading }] = useAddLikeMutation();
+  const onLikeHandler = () => {
+    addLike(member.userName);
+  };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isSuccess) {
+    showSucces('You have successfully liked ' + member.knownAs);
+  }
+
   return (
     <div className="border border-slate-300 rounded-lg overflow-hidden member_card w-[213px] h-[291px]">
       <div className="h-3/4 overflow-hidden relative img_wrapper">
@@ -31,7 +47,7 @@ const MemberCard = ({ member }: MemberCardProps) => {
             </Link>
           </li>
           <li className="">
-            <button className="icon_btn">
+            <button onClick={onLikeHandler} className="icon_btn">
               <FontAwesomeIcon icon={faHeart} color="#fff" />
             </button>
           </li>

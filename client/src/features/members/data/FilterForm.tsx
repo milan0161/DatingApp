@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 
 type FilterFormProps = {
-  setFilters: React.Dispatch<React.SetStateAction<PaginationRequest>>;
-  filter: PaginationRequest;
+  setFilters: React.Dispatch<React.SetStateAction<PaginationUserRequest>>;
+  filter: PaginationUserRequest;
   gender?: string;
 };
 type FilterInputs = {

@@ -87,4 +87,7 @@
   .validation_invalid {
     @apply border-red-500 bg-red-200 border-2;
   }
+  .btnRadioActive {
+    @apply bg-red-700;
+  }
 }
