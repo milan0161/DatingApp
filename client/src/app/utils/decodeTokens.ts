@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 type User = {
-  nameid: string;
+  unique_name: string;
   exp: number;
 };
 

@@ -7,6 +7,7 @@ const accountSlice = createSlice({
       token: '',
       username: '',
       photoUrl: '',
+      knownAs: '',
     },
     isLoggedIn: false,
   } as IAccountInitalState,

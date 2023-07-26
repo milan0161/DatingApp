@@ -22,13 +22,16 @@ const Drowdown = ({ username }: DropDownProps) => {
   };
   return (
     <>
-      <div className=" cursor-pointer my-5 text-center z-10 ml-3 w-28">
-        <button className="" onClick={() => setIsVisible((prev) => !prev)}>
+      <div className=" cursor-pointer my-5 text-center z-10 ml-3 w-36  ">
+        <button
+          className="w-full"
+          onClick={() => setIsVisible((prev) => !prev)}
+        >
           {`Welcome ${username}`}
           {/* {"Welcome " + prvo.toUpperCase().concat(...ostatak)} */}
         </button>
         {isVisible && (
-          <div className="flex flex-col gap-y-1 bg-slate-500 mt-[25px] border border-slate-800 rounded w-28 items-center py-2">
+          <div className="flex flex-col gap-y-1 bg-slate-500 mt-[25px] border border-slate-800 rounded w-36 items-center py-2">
             <Link
               to={'member/edit'}
               className="hover:translate-x-2 duration-150 text-white"

@@ -17,6 +17,7 @@ type User = {
   username: string;
   token: string;
   photoUrl: string;
+  knownAs?: string;
 };
 interface IAccountInitalState {
   user: User;

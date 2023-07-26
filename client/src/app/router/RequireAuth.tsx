@@ -25,7 +25,7 @@ const RequireAuth = () => {
       return;
     }
     const decodedToken = decodedAToken(token);
-    dispatch(onLogin({ token, username: decodedToken!.nameid }));
+    dispatch(onLogin({ token, username: decodedToken!.unique_name }));
   }, [isLoggedIn]);
 
   return <Outlet />;

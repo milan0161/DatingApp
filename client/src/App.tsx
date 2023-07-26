@@ -24,7 +24,11 @@ function App() {
     const decodedToken = decodedAToken(token);
     const mainPhoto = getMainImage();
     dispatch(
-      onLogin({ token, username: decodedToken!.nameid, photoUrl: mainPhoto! }),
+      onLogin({
+        token,
+        username: decodedToken!.unique_name,
+        photoUrl: mainPhoto!,
+      }),
     );
   }, [isLoggedIn]);
 

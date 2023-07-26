@@ -18,6 +18,9 @@
   a {
     @apply text-blue-600 cursor-pointer;
   }
+  .container {
+    @apply w-['80%'] mx-auto;
+  }
   .navigation_bar {
     display: grid;
     grid-template-columns: 0.5fr 2fr 1fr;

@@ -45,7 +45,7 @@ const MemberCard = ({ member }: MemberCardProps) => {
       <div className="text-center mt-4">
         <h6 className="font-bold">
           <FontAwesomeIcon className="mr-2" icon={faUser} />
-          {member.userName}
+          {member.userName},<span> {member.age}</span>
         </h6>
         <p className="opacity-60">{member.city}</p>
       </div>

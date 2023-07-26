@@ -28,3 +28,20 @@ interface FormInput {
   city: string;
   country: string;
 }
+
+interface Pagination<T> {
+  currentPage: number;
+  itemsPerPage: number;
+  totalItems: number;
+  totalPages: number;
+  data: T[];
+}
+
+interface PaginationRequest {
+  page: number;
+  itemsPerPage: number;
+  minAge: number;
+  maxAge: number;
+  gender?: string;
+  orderBy?: string;
+}

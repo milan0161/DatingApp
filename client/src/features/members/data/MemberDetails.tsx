@@ -32,20 +32,20 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
           <div>
             <strong>Location:</strong>
             <p>
-              {member!.city}, {member!.country}
+              {member?.city}, {member?.country}
             </p>
           </div>
           <div>
             <strong>Age:</strong>
-            <p>{member!.age}</p>
+            <p>{member?.age}</p>
           </div>
           <div>
             <strong>Last active:</strong>
-            <p>{member!.lastActive}</p>
+            <p>{new Date(member!.lastActive).toDateString()}</p>
           </div>
           <div>
             <strong>Member since:</strong>
-            <p>{member!.created}</p>
+            <p>{new Date(member!.created).toDateString()}</p>
           </div>
         </div>
         <div className="mb-4">
