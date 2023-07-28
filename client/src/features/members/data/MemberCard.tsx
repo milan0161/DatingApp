@@ -4,10 +4,12 @@ import {
   faUser,
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAddLikeMutation } from '../../likes/api/likesApi';
 import { showSucces } from '../../../app/utils/ToastMsg';
 import LoadingSpinner from '../../common/UI/LoadingSpinner';
+import { useDispatch } from 'react-redux';
+import { setTabsetValue } from '../state/memberSlice';
 
 type MemberCardProps = {
   member: Member;
@@ -15,6 +17,8 @@ type MemberCardProps = {
 
 const MemberCard = ({ member }: MemberCardProps) => {
   const [addLike, { isSuccess, isLoading }] = useAddLikeMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onLikeHandler = () => {
     addLike(member.userName);
   };
@@ -26,6 +30,11 @@ const MemberCard = ({ member }: MemberCardProps) => {
   if (isSuccess) {
     showSucces('You have successfully liked ' + member.knownAs);
   }
+
+  const toMessagesHandler = () => {
+    navigate(`/members/${member.userName}`);
+    dispatch(setTabsetValue(3));
+  };
 
   return (
     <div className="border border-slate-300 rounded-lg overflow-hidden member_card w-[213px] h-[291px]">
@@ -39,7 +48,7 @@ const MemberCard = ({ member }: MemberCardProps) => {
         <ul className="icon_wrapper">
           <li className="w-10 h-10 flex">
             <Link
-              to={`${member.userName}`}
+              to={`/members/${member.userName}`}
               className="w-full flex items-center justify-center bg-orange-600
                hover:bg-orange-700 duration-200 rounded"
             >
@@ -52,7 +61,7 @@ const MemberCard = ({ member }: MemberCardProps) => {
             </button>
           </li>
           <li className="">
-            <button className="icon_btn">
+            <button className="icon_btn" onClick={toMessagesHandler}>
               <FontAwesomeIcon icon={faEnvelope} color="#fff" />
             </button>
           </li>

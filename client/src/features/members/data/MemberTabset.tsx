@@ -9,11 +9,16 @@ type MemberTabsetProps = {
 
   children?: React.ReactNode;
   value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: (num: number) => void;
   labels: string[];
 };
 
-const MemberTabSet = ({ children, value, setValue, labels }: MemberTabsetProps) => {
+const MemberTabSet = ({
+  children,
+  value,
+  setValue,
+  labels,
+}: MemberTabsetProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

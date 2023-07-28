@@ -4,13 +4,22 @@ import MemberTabPanel from './MemberTabPanel';
 import MemberTabset from './MemberTabset';
 import MemberImageList from './MemberPhotoList';
 import LoadingSpinner from '../../common/UI/LoadingSpinner';
+import MessageThread from '../../messages/data/MessageThread';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks/hooks';
+import { setTabsetValue } from '../state/memberSlice';
 
 type MemberDetailsProps = {
   username: string;
 };
 
 const MemberDetails = ({ username }: MemberDetailsProps) => {
-  const [value, setValue] = React.useState(0);
+  const tabsetValue = useAppSelector((state) => state.member.tabsetValue);
+  const dispatch = useAppDispatch();
+
+  const setValue = (num: number) => {
+    dispatch(setTabsetValue(num));
+  };
+  // const [value, setValue] = React.useState(0);
   const { data: member, isLoading } = useGetMemberQuery(username);
 
   if (isLoading) {
@@ -63,24 +72,24 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
         <MemberTabset
           username={member!.userName}
           setValue={setValue}
-          value={value}
+          value={tabsetValue}
           labels={['About', 'Interest', 'Photos', 'Messages']}
         >
-          <MemberTabPanel value={value} index={0}>
+          <MemberTabPanel value={tabsetValue} index={0}>
             <h4 className="text-[30px] text-bold mb-4">Description</h4>
             <p>{member!.introduction}</p>
             <h4 className="text-[30px] text-bold my-4">Looking for</h4>
             <p>{member!.lookingFor}</p>
           </MemberTabPanel>
-          <MemberTabPanel value={value} index={1}>
+          <MemberTabPanel value={tabsetValue} index={1}>
             <h4 className="text-[30px] text-bold mb-4">Interests</h4>
             <p>{member!.interests}</p>
           </MemberTabPanel>
-          <MemberTabPanel value={value} index={2}>
+          <MemberTabPanel value={tabsetValue} index={2}>
             <MemberImageList images={member!.photos} />
           </MemberTabPanel>
-          <MemberTabPanel value={value} index={3}>
-            <p>Messages will go here</p>
+          <MemberTabPanel value={tabsetValue} index={3}>
+            <MessageThread username={member!.userName} />
           </MemberTabPanel>
         </MemberTabset>
       </div>

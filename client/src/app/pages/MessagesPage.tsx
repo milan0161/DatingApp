@@ -1,5 +1,7 @@
+import MessagesList from '../../features/messages/data/MessagesList';
+
 const MessagesPage = () => {
-  return <div>MessagesPage</div>;
+  return <MessagesList />;
 };
 
 export default MessagesPage;
