@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGetMemberQuery } from '../api/membersApi';
 import MemberTabPanel from './MemberTabPanel';
 import MemberTabset from './MemberTabset';

@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks';
-import { getAToken } from '../utils/saveToken';
-import {
-  onLogin,
-  onLogout,
-  // setIsAuth,
-} from '../../features/account/state/accountSlice';
+import { getAToken, getMainImage } from '../utils/saveToken';
+import { onLogin, onLogout } from '../../features/account/state/accountSlice';
 import { decodedAToken } from '../utils/decodeTokens';
+import { showError } from '../utils/ToastMsg';
 
 const useAuth = () => {
   const isLoggedIn = useAppSelector((state) => state.account.isLoggedIn);
@@ -19,11 +16,18 @@ const useAuth = () => {
     const token = getAToken();
     if (!token) {
       dispatch(onLogout());
-      // setPersist(false);
+      showError('You are not authorized to access.');
       return;
     }
     const decodedToken = decodedAToken(token);
-    dispatch(onLogin({ token, username: decodedToken!.unique_name }));
+    const imageUrl = getMainImage();
+    dispatch(
+      onLogin({
+        token,
+        username: decodedToken!.unique_name,
+        photoUrl: imageUrl,
+      }),
+    );
   }, [isLoggedIn]);
 
   return isLoggedIn;

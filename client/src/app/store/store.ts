@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from '../api/apiSLice';
 import accountSlice from '../../features/account/state/accountSlice';
 import memberSlice from '../../features/members/state/memberSlice';
+import adminSlice from '../../features/admin/state/adminSlice';
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     account: accountSlice,
     member: memberSlice,
+    admin: adminSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

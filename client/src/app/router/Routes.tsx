@@ -8,6 +8,8 @@ import RootLayout from '../pages/RootLayout';
 import RequireAuth from './RequireAuth';
 import MemberDetailPage from '../pages/MemberDetailPage';
 import MemberEditPage from '../pages/MemberEditPage';
+import AdminPanel from '../pages/AdminPanel';
+import AdminGuard from './AdminGuard';
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,15 @@ export const router = createBrowserRouter([
           {
             path: 'messages',
             element: <MessagesPage />,
+          },
+          {
+            element: <AdminGuard />,
+            children: [
+              {
+                path: 'admin',
+                element: <AdminPanel />,
+              },
+            ],
           },
         ],
       },

@@ -5,6 +5,8 @@ import { onLogin } from '../../account/state/accountSlice';
 import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
 import { saveMainImgUrl, saveToken } from '../../../app/utils/saveToken';
 import { decodedAToken } from '../../../app/utils/decodeTokens';
+import { checkIsAdmin } from '../../../app/utils/adminCheck';
+import { setIsAdmin } from '../../admin/state/adminSlice';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -25,9 +27,12 @@ const LoginForm = () => {
     if (isSuccess && data) {
       const decodedToken = decodedAToken(data.token);
       saveToken(data.token, decodedToken!.exp);
-      saveMainImgUrl(data.photoUrl, decodedToken!.exp);
+      if (data.photoUrl) {
+        saveMainImgUrl(data.photoUrl!, decodedToken!.exp);
+      }
       showSucces('You have successfully logged in');
       dispatch(onLogin(data));
+      if (checkIsAdmin(data.token)) dispatch(setIsAdmin(true));
     } else if (isError) {
       showApiError(error);
     }

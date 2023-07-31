@@ -24,6 +24,8 @@ namespace API.Controllers
             this._mapper = mapper;
         }
 
+
+        //[Authorize(Roles = "Admin")] Tako ogranicavas ko moze da pristupi endpointu sobzirom na role
         [HttpGet] //method atribut
         public async Task<ActionResult<PagedList<MemberDto>>> GetUser([FromQuery] UserParams userParams)
         {

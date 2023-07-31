@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 
 type MemberTabsetProps = {
   username: string;
-
   children?: React.ReactNode;
   value: number;
   setValue: (num: number) => void;

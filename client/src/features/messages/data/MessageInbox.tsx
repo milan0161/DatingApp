@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks/hooks';
 import { setTabsetValue } from '../../members/state/memberSlice';
 import { useDeleteMessageMutation } from '../api/messagesApi';
+import UserPhoto from '../../../assets/UserPhoto.svg';
 
 import { showSucces } from '../../../app/utils/ToastMsg';
 type MessageInboxProps = {
@@ -12,6 +13,14 @@ const MessageInbox = ({ container, message }: MessageInboxProps) => {
   const navigate = useNavigate();
   const [deleteMessage, { isSuccess }] = useDeleteMessageMutation();
   const dispatch = useAppDispatch();
+
+  const recipientPhoto = message.recipientPhotoUrl
+    ? message.recipientPhotoUrl
+    : UserPhoto;
+  const senderPhoto = message.senderPhotoUrl
+    ? message.senderPhotoUrl
+    : UserPhoto;
+
   const toMessagesHandler = () => {
     navigate(
       `/members/${
@@ -40,11 +49,7 @@ const MessageInbox = ({ container, message }: MessageInboxProps) => {
           <img
             className="rounded-full max-h-[50px]"
             //   src={message.recipientPhotoUrl}
-            src={
-              container == 'Outbox'
-                ? message.recipientPhotoUrl
-                : message.senderPhotoUrl
-            }
+            src={container == 'Outbox' ? recipientPhoto : senderPhoto}
             alt={
               container === 'Outbox'
                 ? message.recipientUsername

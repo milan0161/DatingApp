@@ -16,7 +16,7 @@ type ReqRegister = {
 type User = {
   username: string;
   token: string;
-  photoUrl: string;
+  photoUrl: string | undefined;
   knownAs?: string;
 };
 interface IAccountInitalState {

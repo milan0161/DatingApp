@@ -1,7 +1,7 @@
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TimeAgo from '../../common/date/TimeAgo';
-
+import UserPhoto from '../../../assets/UserPhoto.svg';
 type SingleMessageProps = {
   message: Message;
   username: string;
@@ -13,8 +13,8 @@ const SingleMessage = ({ message, username }: SingleMessageProps) => {
       <span>
         <img
           className="max-h-[50px] rounded-full"
-          src={message.senderPhotoUrl}
-          alt={message.senderUsername}
+          src={message.senderPhotoUrl ? message.senderPhotoUrl : UserPhoto}
+          alt={message.senderUsername ? message.senderUsername : UserPhoto}
         />
       </span>
       <div>
