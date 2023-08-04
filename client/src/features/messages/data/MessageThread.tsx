@@ -63,7 +63,7 @@ const MessageThread = ({ username }: MessageThreadProps) => {
           </p>
         ))}
       {messages && messages?.length > 0 && (
-        <ul ref={list} className="overflow-auto h-[700px]">
+        <ul ref={list} className="overflow-auto h-[500px]">
           {messages.map((message) => {
             return (
               <SingleMessage

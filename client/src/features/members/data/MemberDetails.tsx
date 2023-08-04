@@ -9,6 +9,9 @@ import { setTabsetValue } from '../state/memberSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import TimeAgo from '../../common/date/TimeAgo';
+import { useNavigate } from 'react-router-dom';
+import { useAddLikeMutation } from '../../likes/api/likesApi';
+import { showSucces } from '../../../app/utils/ToastMsg';
 
 type MemberDetailsProps = {
   username: string;
@@ -17,20 +20,33 @@ type MemberDetailsProps = {
 const MemberDetails = ({ username }: MemberDetailsProps) => {
   const tabsetValue = useAppSelector((state) => state.member.tabsetValue);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const onlineUsers = useAppSelector((state) => state.notification.onlineUsers);
+  const [addLike, { isSuccess }] = useAddLikeMutation();
   const setValue = (num: number) => {
     dispatch(setTabsetValue(num));
   };
-  // const [value, setValue] = React.useState(0);
+
   const { data: member, isLoading } = useGetMemberQuery(username);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
+  const likeHandler = () => {
+    addLike(username);
+  };
+  if (isSuccess) {
+    showSucces('You have successfully liked ' + username);
+  }
+
+  const messageHandler = () => {
+    navigate(`/members/${username}`);
+    dispatch(setTabsetValue(3));
+  };
 
   return (
     <div className="grid grid-cols-12">
-      <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4 max-h-[676px]">
+      <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4 max-h-[676px] max-w-[420px]">
         <div className="w-full h-[50%] border border-slate-300 px-1 py-1 rounded">
           <img
             className="w-full h-full"
@@ -75,10 +91,18 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
         </div>
         <div className="mb-4">
           <div className="flex flex-row items-center justify-center gap-x-5">
-            <button className="btn bg-orange-600 text-white font-bold">
+            <button
+              type="button"
+              onClick={likeHandler}
+              className="btn bg-orange-600 text-white font-bold"
+            >
               Like
             </button>
-            <button className="btn bg-green-600 text-white font-bold">
+            <button
+              type="button"
+              onClick={messageHandler}
+              className="btn bg-green-600 text-white font-bold"
+            >
               Messages
             </button>
           </div>

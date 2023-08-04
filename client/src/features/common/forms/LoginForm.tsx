@@ -7,9 +7,11 @@ import { saveMainImgUrl, saveToken } from '../../../app/utils/saveToken';
 import { decodedAToken } from '../../../app/utils/decodeTokens';
 import { checkIsAdmin } from '../../../app/utils/adminCheck';
 import { setIsAdmin } from '../../admin/state/adminSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -32,6 +34,7 @@ const LoginForm = () => {
       }
       showSucces('You have successfully logged in');
       dispatch(onLogin(data));
+      navigate('/members');
       if (checkIsAdmin(data.token)) dispatch(setIsAdmin(true));
     } else if (isError) {
       showApiError(error);

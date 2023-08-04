@@ -6,6 +6,7 @@ import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
 import { useForm } from 'react-hook-form';
 import { saveToken } from '../../../app/utils/saveToken';
 import { decodedAToken } from '../../../app/utils/decodeTokens';
+import { useNavigate } from 'react-router-dom';
 
 type RegisterFormProps = {
   setRegister: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ type FormValues = {
 
 const RegisterForm = ({ setRegister }: RegisterFormProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [registerUser] = useRegisterMutation();
   const { register, handleSubmit, formState, watch } = useForm<FormValues>({
     defaultValues: {
@@ -41,6 +43,7 @@ const RegisterForm = ({ setRegister }: RegisterFormProps) => {
         saveToken(data.token, decodedToken!.exp);
         showSucces('You have successfully registered');
         dispatch(onLogin(data));
+        navigate('/members');
       })
       .catch((err) => showApiError(err));
   };

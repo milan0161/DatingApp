@@ -61,3 +61,21 @@ export const showNewMessage = (username: string) => {
     }
   });
 };
+
+export const showSaveChanges = () => {
+  const Toast = Swal.default;
+  return Toast.fire({
+    title: 'Do you want to save the changes?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Save',
+    denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      return result.isConfirmed;
+    } else if (result.isDenied) {
+      return result.isDenied;
+    }
+  });
+};
