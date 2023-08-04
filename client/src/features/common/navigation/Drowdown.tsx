@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../app/hooks/hooks';
 import { onLogout } from '../../account/state/accountSlice';
 import { useNavigate } from 'react-router-dom';
 import { removeMainImage, removeToken } from '../../../app/utils/saveToken';
+import { stopHubConnection } from '../../../app/utils/signalR/connection';
 
 type DropDownProps = {
   username: string;

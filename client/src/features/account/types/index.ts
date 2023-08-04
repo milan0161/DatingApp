@@ -22,4 +22,5 @@ type User = {
 interface IAccountInitalState {
   user: User;
   isLoggedIn: boolean | undefined;
+  isOnline: boolean;
 }

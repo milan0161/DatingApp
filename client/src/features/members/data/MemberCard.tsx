@@ -1,8 +1,4 @@
-import {
-  faEnvelope,
-  faHeart,
-  faUser,
-} from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAddLikeMutation } from '../../likes/api/likesApi';
@@ -10,6 +6,8 @@ import { showSucces } from '../../../app/utils/ToastMsg';
 import LoadingSpinner from '../../common/UI/LoadingSpinner';
 import { useDispatch } from 'react-redux';
 import { setTabsetValue } from '../state/memberSlice';
+import { useAppSelector } from '../../../app/hooks/hooks';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 type MemberCardProps = {
   member: Member;
@@ -18,6 +16,7 @@ type MemberCardProps = {
 const MemberCard = ({ member }: MemberCardProps) => {
   const [addLike, { isSuccess, isLoading }] = useAddLikeMutation();
   const navigate = useNavigate();
+  const onlineUsers = useAppSelector((state) => state.notification.onlineUsers);
   const dispatch = useDispatch();
   const onLikeHandler = () => {
     addLike(member.userName);
@@ -69,7 +68,11 @@ const MemberCard = ({ member }: MemberCardProps) => {
       </div>
       <div className="text-center mt-4">
         <h6 className="font-bold">
-          <FontAwesomeIcon className="mr-2" icon={faUser} />
+          <FontAwesomeIcon
+            className="mr-2"
+            icon={faUser}
+            color={onlineUsers?.includes(member?.userName) ? '#008000' : '#000'}
+          />
           {member.userName},<span> {member.age}</span>
         </h6>
         <p className="opacity-60">{member.city}</p>

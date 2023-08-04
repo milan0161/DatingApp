@@ -7,8 +7,8 @@ interface Message {
   recipientUsername: string;
   recipientPhotoUrl: string;
   content: string;
-  dateRead: Date | null;
-  messageSent: Date;
+  dateRead: string | null;
+  messageSent: string;
 }
 
 interface PaginationMessagesRequest extends PaginationRequest {
@@ -18,4 +18,18 @@ interface PaginationMessagesRequest extends PaginationRequest {
 interface SendMessage {
   recipientUsername: string;
   content: string;
+}
+
+interface IMessageInitalState {
+  messages: Message[];
+}
+
+interface Group {
+  name: string;
+  connections: Connections[];
+}
+
+interface Connections {
+  connectionId: string;
+  username: string;
 }

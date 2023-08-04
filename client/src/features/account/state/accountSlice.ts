@@ -10,6 +10,7 @@ const accountSlice = createSlice({
       knownAs: '',
     },
     isLoggedIn: false,
+    isOnline: false,
   } as IAccountInitalState,
   reducers: {
     onLogin: (state, action: PayloadAction<User>) => {
@@ -24,6 +25,9 @@ const accountSlice = createSlice({
     setMainPhoto: (state, action: PayloadAction<string>) => {
       state.user.photoUrl = action.payload;
     },
+    setIsOnline: (state, action: PayloadAction<boolean>) => {
+      state.isOnline = action.payload;
+    },
     // setIsAuth: (state, action: PayloadAction<boolean>) => {
     //   state.isLoggedIn = action.payload;
     // },
@@ -31,4 +35,5 @@ const accountSlice = createSlice({
 });
 
 export default accountSlice.reducer;
-export const { onLogin, onLogout, setMainPhoto } = accountSlice.actions;
+export const { onLogin, onLogout, setMainPhoto, setIsOnline } =
+  accountSlice.actions;

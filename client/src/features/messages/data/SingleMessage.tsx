@@ -21,8 +21,10 @@ const SingleMessage = ({ message, username }: SingleMessageProps) => {
         <div className="header">
           <small>
             <span className="text-slate-400">
-              <FontAwesomeIcon icon={faClock} />
-              <TimeAgo time={message.messageSent.toString()} />
+              <span className="mr-1">
+                <FontAwesomeIcon icon={faClock} />
+              </span>
+              <TimeAgo time={message.messageSent} />
             </span>
             {!message.dateRead && message.senderUsername !== username && (
               <span className="text-red-600">(unread)</span>
@@ -30,7 +32,7 @@ const SingleMessage = ({ message, username }: SingleMessageProps) => {
             {message.dateRead && message.senderUsername !== username && (
               <span className="text-green-600">
                 (read
-                <TimeAgo time={message.dateRead.toString()} />)
+                <TimeAgo time={message.dateRead} />)
               </span>
             )}
           </small>

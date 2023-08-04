@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { useCreateMessageMutation } from '../api/messagesApi';
+
+import { HubConnection } from '@microsoft/signalr';
 
 type SendMessageInputValue = {
   content: string;
 };
 type SendMessageFormprops = {
   username: string;
+  connection: HubConnection | undefined;
 };
-const SendMessageForm = ({ username }: SendMessageFormprops) => {
+const SendMessageForm = ({ username, connection }: SendMessageFormprops) => {
   const {
     register,
     handleSubmit,
@@ -15,21 +17,21 @@ const SendMessageForm = ({ username }: SendMessageFormprops) => {
     formState: { errors, isValid },
   } = useForm<SendMessageInputValue>();
 
-  const [createMessage] = useCreateMessageMutation();
-  const sendMessageHandler = (data: SendMessageInputValue) => {
-    createMessage({ content: data.content, recipientUsername: username })
-      .unwrap()
-      .then((data) => {
-        if (data) {
-          reset();
-        }
+  const sendMessageHandler = async (data: SendMessageInputValue) => {
+    if (connection) {
+      connection?.invoke('SendMessage', {
+        recipientUsername: username,
+        content: data.content,
       });
+      reset();
+    }
   };
   return (
     <>
       <p className="text-center text-red-500">{errors.content?.message}</p>
       <form
         className="flex items-center"
+        // onSubmit={sendMessageHandler}
         onSubmit={handleSubmit(sendMessageHandler)}
       >
         <input

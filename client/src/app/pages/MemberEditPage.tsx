@@ -6,6 +6,7 @@ import MemberTabPanel from '../../features/members/data/MemberTabPanel';
 import UpdateMemberForm from '../../features/members/data/MemberUpdateForm';
 import LoadingSpinner from '../../features/common/UI/LoadingSpinner';
 import PhotoEditor from '../../features/members/data/PhotoEditor';
+import TimeAgo from '../../features/common/date/TimeAgo';
 
 // interface FormInput {
 //   introduction: string;
@@ -68,7 +69,9 @@ const MemberEditPage = () => {
           </div>
           <div>
             <strong>Last active:</strong>
-            <p>{member!.lastActive}</p>
+            <p>
+              <TimeAgo time={member?.lastActive} />
+            </p>
           </div>
           <div>
             <strong>Member since:</strong>

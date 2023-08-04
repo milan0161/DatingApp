@@ -1,5 +1,8 @@
+import { HubConnectionBuilder } from '@microsoft/signalr';
 import { apiSlice } from '../../../app/api/apiSLice';
-
+import { getAToken } from '../../../app/utils/saveToken';
+const hubUrl = import.meta.env.VITE_REACT_APP_HUB_URL;
+const token = getAToken();
 const defaultValue: PaginationMessagesRequest = {
   page: 1,
   itemsPerPage: 10,
@@ -34,7 +37,37 @@ const messagesApi = apiSlice.injectEndpoints({
       providesTags: ['Messages'],
     }),
     getMessageThread: builder.query<Message[], string>({
-      query: (username) => ({ url: `api/messages/thread/${username}` }),
+      query: (username) => `hubs/messages?user=${username}`,
+      //  url: `api/messages/thread/${username}`
+      // async onCacheEntryAdded(
+      //   arg,
+      //   { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
+      // ) {
+      //   const connection = new HubConnectionBuilder()
+      //     .withUrl(`${hubUrl}message?user=${arg}`, {
+      //       accessTokenFactory: () => token!,
+      //     })
+      //     .withAutomaticReconnect()
+      //     .build();
+
+      //   try {
+      //     await cacheDataLoaded;
+      //     connection
+      //       .start()
+      //       .then(() => console.log('connected'))
+      //       .catch((err) => console.log(err));
+
+      //     connection?.on('RecieveMessageThread', (data: any) => {
+      //       console.log(data);
+      //     });
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      //   await cacheEntryRemoved;
+      //   connection.stop().then(() => {
+      //     console.log('disconected');
+      //   });
+      // },
       providesTags: ['Messages'],
     }),
     createMessage: builder.mutation<Message, SendMessage>({
@@ -43,6 +76,7 @@ const messagesApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+
       invalidatesTags: ['Messages'],
     }),
     deleteMessage: builder.mutation<void, number>({

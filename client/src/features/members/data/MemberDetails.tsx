@@ -6,6 +6,9 @@ import LoadingSpinner from '../../common/UI/LoadingSpinner';
 import MessageThread from '../../messages/data/MessageThread';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks/hooks';
 import { setTabsetValue } from '../state/memberSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import TimeAgo from '../../common/date/TimeAgo';
 
 type MemberDetailsProps = {
   username: string;
@@ -14,7 +17,7 @@ type MemberDetailsProps = {
 const MemberDetails = ({ username }: MemberDetailsProps) => {
   const tabsetValue = useAppSelector((state) => state.member.tabsetValue);
   const dispatch = useAppDispatch();
-
+  const onlineUsers = useAppSelector((state) => state.notification.onlineUsers);
   const setValue = (num: number) => {
     dispatch(setTabsetValue(num));
   };
@@ -36,7 +39,19 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
             loading="lazy"
           />
         </div>
-        <div className="flex flex-col gap-y-5">
+        <div className="flex flex-col gap-y-4">
+          <div className="mt-2">
+            <p>
+              <FontAwesomeIcon
+                className="mr-2"
+                icon={faUserCircle}
+                color={
+                  onlineUsers?.includes(member?.userName!) ? '#008000' : '#000'
+                }
+              />
+              {onlineUsers?.includes(member?.userName!) ? 'Online' : 'Offline'}
+            </p>
+          </div>
           <div>
             <strong>Location:</strong>
             <p>
@@ -49,7 +64,9 @@ const MemberDetails = ({ username }: MemberDetailsProps) => {
           </div>
           <div>
             <strong>Last active:</strong>
-            <p>{new Date(member!.lastActive).toDateString()}</p>
+            <p>
+              <TimeAgo time={member?.lastActive} />
+            </p>
           </div>
           <div>
             <strong>Member since:</strong>
