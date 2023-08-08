@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./API
+    image: dotnetwebapi:1
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    networks:
+      - datingapp
+  client:
+    build: ./client
+    image: reactclient:1
+    ports:
+      - 5173:5173
+    networks:
+      - datingapp
+
+networks:
+  datingapp:
+    
+
+

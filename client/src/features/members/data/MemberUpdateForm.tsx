@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { showApiError, showSucces } from '../../../app/utils/ToastMsg';
 import { useUpdateMemberMutation } from '../api/membersApi';
+import LoadingSpinner from '../../common/UI/LoadingSpinner';
 
 type UpdateMemberFormProps = {
   introduction: string;
@@ -35,7 +36,7 @@ const UpdateMemberForm = ({
       lookingFor,
     },
   });
-  const [updateMember, {}] = useUpdateMemberMutation();
+  const [updateMember, { isLoading }] = useUpdateMemberMutation();
   useEffect(() => {
     onChange(isDirty);
   }, [isDirty]);
@@ -50,6 +51,9 @@ const UpdateMemberForm = ({
       .catch((error) => showApiError(error));
   };
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <form id="editForm" onSubmit={handleSubmit(updateMemberHandler)}>
       <h4 className="text-[30px] text-bold mb-4">Description</h4>

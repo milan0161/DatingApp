@@ -18,7 +18,6 @@ const LoginForm = () => {
   const [login, { isSuccess, data, error, isError }] = useLoginMutation();
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     login({
       password: passwordRef.current!.value,
       username: emailRef.current!.value,

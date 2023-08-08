@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Role } from '../../../app/utils/decodeTokens';
 import { useUpdateMemberRoleMutation } from '../api/adminApi';
 import LoadingSpinner from '../../common/UI/LoadingSpinner';
-import { useRef, useState } from 'react';
+import { showApiError } from '../../../app/utils/ToastMsg';
 
 type EditRoleFormProps = {
   memberRoles: string[];
@@ -19,9 +19,13 @@ const EditRoleForm = ({
   const { register, handleSubmit } = useForm();
   const [updateRole, { isLoading }] = useUpdateMemberRoleMutation();
 
-  const onSubmitEditRole = (data: any) => {
-    updateRole({ role: data.role, username: username });
-    onCloseModal();
+  const onSubmitEditRole = async (data: any) => {
+    try {
+      await updateRole({ role: data.role, username: username });
+      onCloseModal();
+    } catch (error) {
+      showApiError(error);
+    }
   };
   if (isLoading) {
     return <LoadingSpinner />;

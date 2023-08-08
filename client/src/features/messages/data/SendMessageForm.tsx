@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { HubConnection } from '@microsoft/signalr';
+import { showError } from '../../../app/utils/ToastMsg';
 
 type SendMessageInputValue = {
   content: string;
@@ -19,10 +20,12 @@ const SendMessageForm = ({ username, connection }: SendMessageFormprops) => {
 
   const sendMessageHandler = async (data: SendMessageInputValue) => {
     if (connection) {
-      connection?.invoke('SendMessage', {
-        recipientUsername: username,
-        content: data.content,
-      });
+      connection
+        ?.invoke('SendMessage', {
+          recipientUsername: username,
+          content: data.content,
+        })
+        .catch((err) => showError(err));
       reset();
     }
   };

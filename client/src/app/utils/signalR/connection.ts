@@ -1,5 +1,4 @@
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { showSucces } from '../ToastMsg';
 
 const hubUrl = import.meta.env.VITE_REACT_APP_HUB_URL;
 
@@ -78,7 +77,6 @@ export const startMessageConnection = (
       dispatch(updateMessages());
     }
   });
-
   connection.on('NewMessage', (data) => {
     dispatch(addNewMessage(data));
   });

@@ -1,3 +1,4 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { apiSlice } from '../../../app/api/apiSLice';
 
 const defaultValue: PaginationUserRequest = {
@@ -90,3 +91,10 @@ export const {
   useSetMainPhotoMutation,
   useDeletePhotoMutation,
 } = memberApi;
+
+export const selectMembersResult = memberApi.endpoints.getMembers.select();
+
+const selectMembersData = createSelector(
+  selectMembersResult,
+  (memberResult) => memberResult.data,
+);

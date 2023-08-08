@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks/hooks';
 import {
   addNewMessage,
+  selecetMessagesIds,
+  // selectAllMessages,
   setMessages,
   updateMessages,
 } from '../state/messagesSlice';
@@ -22,7 +24,10 @@ const MessageThread = ({ username }: MessageThreadProps) => {
   const [messageConnection, setMessageConnection] = useState<HubConnection>();
   const token = getAToken();
   const list = useRef<HTMLUListElement>(null);
-  const messages = useAppSelector((state) => state.message.messages);
+  const messages = useAppSelector(selecetMessagesIds);
+
+  // const messages = useAppSelector(selectAllMessages);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -68,8 +73,10 @@ const MessageThread = ({ username }: MessageThreadProps) => {
             return (
               <SingleMessage
                 username={username}
-                key={message.id}
-                message={message}
+                // key={message.id}
+                key={message}
+                // message={message}
+                messageId={message}
               />
             );
           })}
