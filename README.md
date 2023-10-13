@@ -18,7 +18,6 @@ Dating app is full stack web applications with a lot of functionalities that hel
 ## About Application
 Dating app is full stack web application that i built from scratch, it has a lot of funcionalities and some of them are:
   -  Authentication and Authorization
-  -  Persistent Login using Access token and Refresh token flow
   -  Image upload with drag and drop functionality
   -  Tracker when user was online last time
   -  Real time presence notifications
