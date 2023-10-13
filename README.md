@@ -12,7 +12,7 @@ Dating app is full stack web applications with a lot of functionalities that hel
 - TypeScript
 - React
 - Redux Toolkit and Redux Toolkit Query
-- SignalR Client
+- Microsoft/SignalR
 - Tailwind
 
 ## About Application
