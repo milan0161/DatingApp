@@ -1,6 +1,4 @@
 import { Outlet, Navigate } from 'react-router-dom';
-import useAdminGuard from '../hooks/useAdminGuard';
-// import { decodedAToken } from '../utils/decodeTokens';
 import { getAToken } from '../utils/saveToken';
 import { checkIsAdmin } from '../utils/adminCheck';
 

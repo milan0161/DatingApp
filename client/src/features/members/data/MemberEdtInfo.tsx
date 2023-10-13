@@ -6,12 +6,6 @@ type MemberEditInfoProps = {
 };
 
 const MemberEdtInfo = ({ member, isDirty }: MemberEditInfoProps) => {
-  //   useEffect(() => {
-  //     return () => {
-  //       if (!isDirty) return;
-  //       showSaveChanges();
-  //     };
-  //   }, [isDirty]);
   return (
     <div className="col-span-4 border flex flex-col justify-between border-slate-300 rounded px-4 pt-4 max-h-[676px] max-w-[420px]">
       <div className="w-full h-[50%] border border-slate-300 px-1 py-1 rounded">
@@ -41,7 +35,7 @@ const MemberEdtInfo = ({ member, isDirty }: MemberEditInfoProps) => {
         </div>
         <div>
           <strong>Member since:</strong>
-          <p>{member!.created}</p>
+          <p>{new Date(member!.created).toDateString()}</p>
         </div>
       </div>
       <div className="mb-4 border flex flex-row">

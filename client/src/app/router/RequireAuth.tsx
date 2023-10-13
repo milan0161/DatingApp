@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 const RequireAuth = () => {
   const isAuth = useAuth();
 
-  if (!isAuth) <Navigate to={'/'} />;
+  if (!isAuth) return <Navigate to={'/'} />;
 
   return <Outlet />;
 };

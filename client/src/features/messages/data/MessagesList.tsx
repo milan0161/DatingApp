@@ -12,10 +12,12 @@ import LoadingSpinner from '../../common/UI/LoadingSpinner';
 
 const MessagesList = () => {
   const [container, setContainer] = useState<string>('Unread');
+
   const [pagination, setPagination] = useState<PaginationRequest>({
     itemsPerPage: 5,
     page: 1,
   });
+
   const { data, isLoading } = useGetMessagesQuery({
     ...pagination,
     container: container,

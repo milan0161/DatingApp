@@ -65,7 +65,7 @@ const PhotoEditor = ({ photos }: PhotoEditorProps) => {
                       });
                   }}
                 >
-                  Main
+                  {photo.isMain ? 'Main' : 'Other'}
                 </button>
                 <button
                   disabled={photo.isMain}

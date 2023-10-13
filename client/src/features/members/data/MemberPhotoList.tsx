@@ -8,14 +8,14 @@ const MemberImageList = ({ images }: MemberImageListProps) => {
   return (
     <div className="border border-slate-300 rounded w-fit p-4">
       <ImageList
-        variant="woven"
+        variant="standard"
         sx={{ width: 500, height: 450 }}
         cols={3}
         rowHeight={164}
       >
         {images.map((img) => (
           <ImageListItem key={img.id}>
-            <img src={img.url} loading="lazy" />
+            <img className="" src={img.url} loading="lazy" />
           </ImageListItem>
         ))}
       </ImageList>
