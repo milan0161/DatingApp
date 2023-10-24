@@ -41,7 +41,7 @@ const MessageThread = ({ username }: MessageThreadProps) => {
     if (listElement) {
       listElement.scrollTop = listElement.scrollHeight;
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (messageConnection) {
